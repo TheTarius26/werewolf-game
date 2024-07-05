@@ -66,7 +66,9 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                             passwordStreamController.add(!isVisible);
                           },
                           icon: Icon(
-                            isVisible ? Icons.visibility : Icons.visibility_off,
+                            !isVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
                           ),
                         ),
                       ),
