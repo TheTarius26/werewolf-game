@@ -51,8 +51,8 @@ class _RoomScreenState extends State<RoomScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text(
-                'ROOM NAME',
+               Text(
+                roomName,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
