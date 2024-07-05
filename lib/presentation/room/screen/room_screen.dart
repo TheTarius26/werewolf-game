@@ -28,6 +28,7 @@ class _RoomScreenState extends State<RoomScreen> {
   ];
 
   var maxPlayers = 5;
+  var password = '';
   late var roomName = '';
   late final String roomId;
 
@@ -36,6 +37,8 @@ class _RoomScreenState extends State<RoomScreen> {
     super.initState();
     roomId = generateRoomId();
     roomName = widget.roomName;
+    password = widget.password;
+    maxPlayers = widget.maxPlayers;
   }
 
   @override
