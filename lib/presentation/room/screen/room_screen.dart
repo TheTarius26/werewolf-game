@@ -31,6 +31,7 @@ class _RoomScreenState extends State<RoomScreen> {
   var password = '';
   late var roomName = '';
   late final String roomId;
+  var isPasswordVisible = false;
 
   @override
   void initState() {
@@ -51,10 +52,10 @@ class _RoomScreenState extends State<RoomScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-               Text(
+              Text(
                 roomName,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
@@ -201,59 +202,99 @@ class _RoomScreenState extends State<RoomScreen> {
         scrollControlDisabledMaxHeightRatio: .9,
         builder: (_) {
           return StatefulBuilder(
-            builder: (context, setState) => Padding(
-              padding: const EdgeInsets.all(Dimen.padding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Text(
-                    'Room Setting',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+            builder: (context, setState) {
+              return Padding(
+                padding: const EdgeInsets.all(Dimen.padding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Text(
+                      'Room Setting',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: Dimen.smPadding),
-                  Row(
-                    children: [
-                      const Text(
-                        'Player limit',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                    const SizedBox(height: Dimen.smPadding),
+                    TextFormField(
+                      initialValue: roomName,
+                      decoration: const InputDecoration(
+                        labelText: 'Room Name',
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          roomName = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: Dimen.smPadding),
+                    TextFormField(
+                      initialValue: password,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        suffix: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isPasswordVisible = !isPasswordVisible;
+                            });
+                          },
+                          icon: Icon(
+                            isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
                         ),
                       ),
-                      const Spacer(),
-                      IconButton(
-                        onPressed: () {
-                          if (maxPlayers == 5) return;
-                          setState(() {
-                            maxPlayers--;
-                          });
-                        },
-                        icon: const Icon(Icons.remove),
-                      ),
-                      Text(
-                        maxPlayers.toString(),
-                        style: const TextStyle(
-                          fontSize: 18,
+                      obscureText: !isPasswordVisible,
+                      enableInteractiveSelection: false,
+                      onChanged: (value) {
+                        setState(() {
+                          password = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: Dimen.smPadding),
+                    Row(
+                      children: [
+                        const Text(
+                          'Max Players',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          if (maxPlayers == 30) return;
-                          setState(() {
-                            maxPlayers++;
-                          });
-                        },
-                        icon: const Icon(Icons.add),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () {
+                            if (maxPlayers == 5) return;
+                            setState(() {
+                              maxPlayers--;
+                            });
+                          },
+                          icon: const Icon(Icons.remove),
+                        ),
+                        Text(
+                          maxPlayers.toString(),
+                          style: const TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            if (maxPlayers == 30) return;
+                            setState(() {
+                              maxPlayers++;
+                            });
+                          },
+                          icon: const Icon(Icons.add),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              );
+            },
           );
         });
   }
