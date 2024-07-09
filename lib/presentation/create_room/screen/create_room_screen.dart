@@ -65,6 +65,8 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                           onPressed: () {
                             passwordStreamController.add(!isVisible);
                           },
+                          iconSize: 18,
+                          padding: EdgeInsets.zero,
                           icon: Icon(
                             !isVisible
                                 ? Icons.visibility
@@ -86,29 +88,59 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                     ),
                   ),
                   const Spacer(),
-                  IconButton(
-                    onPressed: () {
-                      if (maxPlayers == 5) return;
-                      setState(() {
-                        maxPlayers--;
-                      });
-                    },
-                    icon: const Icon(Icons.remove),
-                  ),
-                  Text(
-                    maxPlayers.toString(),
-                    style: const TextStyle(
-                      fontSize: 18,
+                  Material(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(Dimen.borderRadius),
+                      side: const BorderSide(
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      if (maxPlayers == 30) return;
-                      setState(() {
-                        maxPlayers++;
-                      });
-                    },
-                    icon: const Icon(Icons.add),
+                    clipBehavior: Clip.antiAlias,
+                    child: Row(
+                      children: [
+                        Material(
+                          shape: const RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: Colors.white,
+                            ),
+                          ),
+                          child: IconButton(
+                            onPressed: () {
+                              if (maxPlayers == 5) return;
+                              setState(() {
+                                maxPlayers--;
+                              });
+                            },
+                            icon: const Icon(Icons.remove),
+                          ),
+                        ),
+                        const SizedBox(width: Dimen.smPadding),
+                        Text(
+                          maxPlayers.toString(),
+                          style: const TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        const SizedBox(width: Dimen.smPadding),
+                        Material(
+                          shape: const RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: Colors.white,
+                            ),
+                          ),
+                          child: IconButton(
+                            onPressed: () {
+                              if (maxPlayers == 30) return;
+                              setState(() {
+                                maxPlayers++;
+                              });
+                            },
+                            padding: EdgeInsets.zero,
+                            icon: const Icon(Icons.add),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
