@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/core/route/route_config.dart';
+import 'package:myapp/core/theme/app_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,9 +19,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      theme: ThemeData.dark(
-        useMaterial3: true,
-      ),
+      theme: shadcnLikeTheme(),
       routerConfig: _appRoute.config(),
     );
   }
