@@ -26,7 +26,7 @@ class JoinRoomScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: Dimen.padding),
-              ElevatedButton(
+              OutlinedButton(
                 onPressed: () {
                   context.pushRoute(RoomRoute());
                 },
